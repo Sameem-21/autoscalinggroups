@@ -221,7 +221,7 @@ network_interfaces {
   }
   
 
-  user_data = filebase64("${path.root}/htmldata.sh") #using user data to install httpd and start the service
+  user_data = filebase64("${path.root}/htmldata.sh") #using user data to install httpd and start  service
 
   lifecycle {
     create_before_destroy = true
