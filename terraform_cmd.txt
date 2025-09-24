@@ -1,0 +1,3 @@
+terraform plan -out=tfplan.out
+terraform show -no-color tfplan.out > plan_output.txt
+grep "will be created" plan_output.txt

@@ -1,0 +1,312 @@
+
+Note: Objects have changed outside of Terraform
+
+Terraform detected the following changes made outside of Terraform since the
+last "terraform apply" which may have affected this plan:
+
+  # aws_autoscaling_group.demo-asg has been deleted
+  - resource "aws_autoscaling_group" "demo-asg" {
+        id                               = "demo-asg"
+      - name                             = "demo-asg" -> null
+        # (29 unchanged attributes hidden)
+
+        # (5 unchanged blocks hidden)
+    }
+
+  # aws_launch_template.web_launch_template has been deleted
+  - resource "aws_launch_template" "web_launch_template" {
+      - id                                   = "lt-0a8f4fdccfc0456d0" -> null
+        name                                 = "asg-launch-template"
+        # (17 unchanged attributes hidden)
+
+        # (3 unchanged blocks hidden)
+    }
+
+  # aws_lb.app_load_balancer has been deleted
+  - resource "aws_lb" "app_load_balancer" {
+      - arn                                                          = "arn:aws:elasticloadbalancing:ap-south-1:588082971984:loadbalancer/app/app-load-balancer/ddd78de1ae2b256b" -> null
+      - dns_name                                                     = "app-load-balancer-181492573.ap-south-1.elb.amazonaws.com" -> null
+        id                                                           = "arn:aws:elasticloadbalancing:ap-south-1:588082971984:loadbalancer/app/app-load-balancer/ddd78de1ae2b256b"
+        name                                                         = "app-load-balancer"
+        tags                                                         = {
+            "Name" = "app-load-balancer"
+        }
+        # (26 unchanged attributes hidden)
+
+        # (4 unchanged blocks hidden)
+    }
+
+  # aws_lb_target_group.web_target_group has been deleted
+  - resource "aws_lb_target_group" "web_target_group" {
+      - arn                                = "arn:aws:elasticloadbalancing:ap-south-1:588082971984:targetgroup/asg-target-group/87bd7549f6a262f0" -> null
+        id                                 = "arn:aws:elasticloadbalancing:ap-south-1:588082971984:targetgroup/asg-target-group/87bd7549f6a262f0"
+        name                               = "asg-target-group"
+        tags                               = {
+            "Name" = "asg-target-group"
+        }
+        # (18 unchanged attributes hidden)
+
+        # (5 unchanged blocks hidden)
+    }
+
+
+Unless you have made equivalent changes to your configuration, or ignored the
+relevant attributes using ignore_changes, the following plan may include
+actions to undo or respond to these changes.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_autoscaling_group.demo-asg will be created
+  + resource "aws_autoscaling_group" "demo-asg" {
+      + arn                              = (known after apply)
+      + availability_zones               = (known after apply)
+      + default_cooldown                 = (known after apply)
+      + desired_capacity                 = 3
+      + force_delete                     = false
+      + force_delete_warm_pool           = false
+      + health_check_grace_period        = 300
+      + health_check_type                = (known after apply)
+      + id                               = (known after apply)
+      + ignore_failed_scaling_activities = false
+      + load_balancers                   = (known after apply)
+      + max_size                         = 4
+      + metrics_granularity              = "1Minute"
+      + min_size                         = 1
+      + name                             = "demo-asg"
+      + name_prefix                      = (known after apply)
+      + predicted_capacity               = (known after apply)
+      + protect_from_scale_in            = false
+      + region                           = "ap-south-1"
+      + service_linked_role_arn          = (known after apply)
+      + target_group_arns                = (known after apply)
+      + vpc_zone_identifier              = [
+          + "subnet-02ba33efaf730e53d",
+          + "subnet-03211ab72222d547e",
+        ]
+      + wait_for_capacity_timeout        = "10m"
+      + warm_pool_size                   = (known after apply)
+
+      + availability_zone_distribution (known after apply)
+
+      + capacity_reservation_specification (known after apply)
+
+      + instance_maintenance_policy {
+          + max_healthy_percentage = 100
+          + min_healthy_percentage = 0
+        }
+
+      + launch_template {
+          + id      = (known after apply)
+          + name    = (known after apply)
+          + version = "$Latest"
+        }
+
+      + mixed_instances_policy (known after apply)
+
+      + traffic_source (known after apply)
+    }
+
+  # aws_autoscaling_policy.target_tracking_cpu will be created
+  + resource "aws_autoscaling_policy" "target_tracking_cpu" {
+      + arn                     = (known after apply)
+      + autoscaling_group_name  = "demo-asg"
+      + enabled                 = true
+      + id                      = (known after apply)
+      + metric_aggregation_type = (known after apply)
+      + name                    = "Target Tracking Policy"
+      + policy_type             = "TargetTrackingScaling"
+      + region                  = "ap-south-1"
+
+      + target_tracking_configuration {
+          + disable_scale_in = false
+          + target_value     = 50
+
+          + predefined_metric_specification {
+              + predefined_metric_type = "ASGAverageCPUUtilization"
+            }
+        }
+    }
+
+  # aws_launch_template.web_launch_template will be created
+  + resource "aws_launch_template" "web_launch_template" {
+      + arn             = (known after apply)
+      + default_version = (known after apply)
+      + id              = (known after apply)
+      + image_id        = "ami-02d26659fd82cf299"
+      + instance_type   = "t3.micro"
+      + key_name        = "new-key-pair"
+      + latest_version  = (known after apply)
+      + name            = "asg-launch-template"
+      + name_prefix     = (known after apply)
+      + region          = "ap-south-1"
+      + tags_all        = (known after apply)
+      + user_data       = "CiMgIyBzZXQgLWUgICMgRXhpdCBpbW1lZGlhdGVseSBpZiBhIGNvbW1hbmQgZmFpbHMKCiMgIyAjIExvZyBhbGwgb3V0cHV0IHRvIC92YXIvbG9nL3VzZXItZGF0YS5sb2cgZm9yIGRlYnVnZ2luZwojICMgZXhlYyA+ID4odGVlIC92YXIvbG9nL3VzZXItZGF0YS5sb2cgfCBsb2dnZXIgLXQgdXNlci1kYXRhKSAyPiYxCgojICMgZWNobyAi8J+agCBTdGFydGluZyBpbnN0YW5jZSBzZXR1cC4uLiIKCiMgIyAjIFVwZGF0ZSBhbmQgdXBncmFkZSBwYWNrYWdlcwojICMgYXB0LWdldCB1cGRhdGUgLXkKIyAjIGFwdC1nZXQgdXBncmFkZSAteQoKIyAjICMgSW5zdGFsbCBBcGFjaGUyCiMgIyBhcHQtZ2V0IGluc3RhbGwgLXkgYXBhY2hlMgoKIyAjICMgRW5hYmxlIGFuZCBzdGFydCBBcGFjaGUyIHNlcnZpY2UKIyAjIHN5c3RlbWN0bCBlbmFibGUgYXBhY2hlMgojICMgc3lzdGVtY3RsIHN0YXJ0IGFwYWNoZTIKCiMgIyAjIENyZWF0ZSBhIGN1c3RvbSBpbmRleCBwYWdlCiMgIyBjYXQgPDwgJ0VPRicgPiAvdmFyL3d3dy9odG1sL2luZGV4Lmh0bWwKIyAjIDwhRE9DVFlQRSBodG1sPgojICMgPGh0bWw+CiMgIyA8aGVhZD4KIyAjICAgICA8dGl0bGU+RGVwbG95bWVudCBTdWNjZXNzPC90aXRsZT4KIyAjIDwvaGVhZD4KIyAjIDxib2R5IHN0eWxlPSJmb250LWZhbWlseTogQXJpYWwsIHNhbnMtc2VyaWY7IHRleHQtYWxpZ246IGNlbnRlcjsgbWFyZ2luLXRvcDogNTBweDsiPgojICMgICAgIDxoMSBzdHlsZT0iY29sb3I6IGdyZWVuOyI+4pyFIEhleSEgWW91ciBpbmZyYXN0cnVjdHVyZSBpcyB1cCBhbmQgcnVubmluZyDwn46JPC9oMT4KIyAjICAgICA8cD5BdXRvIFNjYWxpbmcgR3JvdXBzLCBMb2FkIEJhbGFuY2VycywgVGFyZ2V0IEdyb3VwcywgYW5kIExhdW5jaCBUZW1wbGF0ZXMgd2VyZSBjcmVhdGVkIHN1Y2Nlc3NmdWxseS48L3A+CiMgIyA8L2JvZHk+CiMgIyA8L2h0bWw+CiMgIyBFT0YKCiMgIyAjIE9wdGlvbmFsIGhlYWx0aCBjaGVjayBlbmRwb2ludCBmb3IgQUxCCiMgIyBlY2hvICJPSyIgPiAvdmFyL3d3dy9odG1sL2hlYWx0aAoKIyAjICMgUmVzdGFydCBBcGFjaGUgdG8gZW5zdXJlIGV2ZXJ5dGhpbmcgaXMgc2VydmVkCiMgIyBzeXN0ZW1jdGwgcmVzdGFydCBhcGFjaGUyCgojICMgZWNobyAi4pyFIFNldHVwIGNvbXBsZXRlLiBBcGFjaGUgaXMgcnVubmluZyBhbmQgc2VydmluZyBjb250ZW50LiIKCiMgZXhlYyA+IC92YXIvbG9nL3VzZXJfZGF0YS5sb2cgMj4mMQojIHNldCAtZQojIHNldCAteAoKIyAjIFVwZGF0ZSBzeXN0ZW0KIyBhcHQtZ2V0IHVwZGF0ZSAteQoKIyAjIEluc3RhbGwgTmdpbngKIyBhcHQtZ2V0IGluc3RhbGwgLXkgbmdpbngKIyBzeXN0ZW1jdGwgZW5hYmxlIG5naW54CiMgc3lzdGVtY3RsIHN0YXJ0IG5naW54CgojICMgT3ZlcndyaXRlIGRlZmF1bHQgTmdpbnggY29uZmlnIHRvIHNlcnZlIGN1c3RvbSBsb2dpbiBwYWdlCgojICMhL2Jpbi9iYXNoCiMgZXhlYyA+IC92YXIvbG9nL3VzZXJfZGF0YS5sb2cgMj4mMQojIHNldCAtZQojIHNldCAteAoKIyAjIFVwZGF0ZSBzeXN0ZW0KIyBhcHQtZ2V0IHVwZGF0ZSAteQoKIyAjIEluc3RhbGwgTmdpbngKIyBhcHQtZ2V0IGluc3RhbGwgLXkgbmdpbngKIyBzeXN0ZW1jdGwgZW5hYmxlIG5naW54CiMgc3lzdGVtY3RsIHN0YXJ0IG5naW54CgojICMgT3ZlcndyaXRlIGRlZmF1bHQgTmdpbnggY29uZmlnIHRvIHNlcnZlIGxvZ2luIHBhZ2UgYW5kIHByb3h5IC9zdWJtaXQgdG8gTm9kZS5qcwojIGNhdCA8PCdOR0lOWCcgfCBzdWRvIHRlZSAvZXRjL25naW54L3NpdGVzLWF2YWlsYWJsZS9kZWZhdWx0ID4gL2Rldi9udWxsCiMgc2VydmVyIHsKIyAgICAgbGlzdGVuIDgwIGRlZmF1bHRfc2VydmVyOwojICAgICBsaXN0ZW4gWzo6XTo4MCBkZWZhdWx0X3NlcnZlcjsKCiMgICAgIHNlcnZlcl9uYW1lIF87CgojICAgICByb290IC91c3Ivc2hhcmUvbmdpbngvaHRtbDsKIyAgICAgaW5kZXggaW5kZXguaHRtbDsKCiMgICAgIGxvY2F0aW9uIC8gewojICAgICAgICAgdHJ5X2ZpbGVzIC9pbmRleC5odG1sID00MDQ7CiMgICAgIH0KCiMgICAgIGxvY2F0aW9uIC9zdWJtaXQgewojICAgICAgICAgcHJveHlfcGFzcyBodHRwOi8vbG9jYWxob3N0OjMwMDA7CiMgICAgICAgICBwcm94eV9odHRwX3ZlcnNpb24gMS4xOwojICAgICAgICAgcHJveHlfc2V0X2hlYWRlciBIb3N0ICRob3N0OwojICAgICAgICAgcHJveHlfc2V0X2hlYWRlciBYLVJlYWwtSVAgJHJlbW90ZV9hZGRyOwojICAgICAgICAgcHJveHlfc2V0X2hlYWRlciBYLUZvcndhcmRlZC1Gb3IgJHByb3h5X2FkZF94X2ZvcndhcmRlZF9mb3I7CiMgICAgICAgICBwcm94eV9zZXRfaGVhZGVyIFgtRm9yd2FyZGVkLVByb3RvICRzY2hlbWU7CiMgICAgIH0KIyB9CiMgTkdJTlgKIyAjdmFsaWRhdGUgYW5kIHJlbG9hZCBuZ2lueAojIHN1ZG8gbmdpbnggLXQgJiYgc3VkbyBzeXN0ZW1jdGwgcmVsb2FkIG5naW54CiMgIyBjYXQgPDwnTkdJTlgnIHwgc3VkbyB0ZWUgL2V0Yy9uZ2lueC9zaXRlcy1hdmFpbGFibGUvZGVmYXVsdCA+IC9kZXYvbnVsbAojICMgc2VydmVyIHsKIyAjICAgICBsaXN0ZW4gODAgZGVmYXVsdF9zZXJ2ZXI7CiMgIyAgICAgbGlzdGVuIFs6Ol06ODAgZGVmYXVsdF9zZXJ2ZXI7CgojICMgICAgIHNlcnZlcl9uYW1lIF87CgojICMgICAgIHJvb3QgL3Vzci9zaGFyZS9uZ2lueC9odG1sOwojICMgICAgIGluZGV4IGluZGV4Lmh0bWw7CgojICMgICAgIGxvY2F0aW9uIC8gewojICMgICAgICAgICAjIFNlcnZlIGluZGV4Lmh0bWwgZGlyZWN0bHkgZm9yIHJvb3QgcmVxdWVzdHMKIyAjICAgICAgICAgdHJ5X2ZpbGVzIC9pbmRleC5odG1sID00MDQ7CiMgIyAgICAgfQojICMgfQojICMgTkdJTlgKCiMgIyBzdWRvIG5naW54IC10ICYmIHN1ZG8gc3lzdGVtY3RsIHJlbG9hZCBuZ2lueAoKIyAjIGNhdCA8PCdOR0lOWCcgPiAvZXRjL25naW54L3NpdGVzLWF2YWlsYWJsZS9kZWZhdWx0CiMgIyBzZXJ2ZXJ7CiMgIyAgICAgbGlzdGVuIDgwIGRlZmF1bHRfc2VydmVyOwojICMgICAgIGxpc3RlbiBbOjpdOjgwIGRlZmF1bHRfc2VydmVyOwoKIyAjICAgICBzZXJ2ZXJfbmFtZSBfOwoKIyAjICAgICByb290IC91c3Ivc2hhcmUvbmdpbngvaHRtbDsKIyAjICAgICBpbmRleCBpbmRleC5odG1sOwoKIyAjICAgICBsb2NhdGlvbiAvIHsKIyAjICAgICAgICAgdHJ5X2ZpbGVzIFwkdXJpIFwkdXJpLyA9NDA0OwojICMgICAgIH0KCiMgIyAgICAgbG9jYXRpb24gL2xvZ2luIHsKIyAjICAgICAgICAgcHJveHlfcGFzcyBodHRwOi8vbG9jYWxob3N0OjMwMDA7CiMgIyAgICAgICAgIHByb3h5X3NldF9oZWFkZXIgSG9zdCBcJGhvc3Q7CiMgIyAgICAgICAgIHByb3h5X3NldF9oZWFkZXIgWC1SZWFsLUlQIFwkcmVtb3RlX2FkZHI7CiMgIyAgICAgICAgIHByb3h5X3NldF9oZWFkZXIgWC1Gb3J3YXJkZWQtRm9yIFwkcHJveHlfYWRkX3hfZm9yd2FyZGVkX2ZvcjsKIyAjICAgICAgICAgcHJveHlfc2V0X2hlYWRlciBYLUZvcndhcmRlZC1Qcm90byBcJHNjaGVtZTsKIyAjICAgICB9CgojICMgfQojICMgTkdJTlgKCiMgIyBWYWxpZGF0ZSBhbmQgcmVsb2FkIE5naW54CiMgI25naW54IC10ICYmIHN5c3RlbWN0bCByZWxvYWQgbmdpbngKCgojICMgRGVwbG95IGxvZ2luIHBhZ2UgdG8gTmdpbnggcm9vdAojIGNhdCA8PCAnRU9GJyA+IC92YXIvd3d3L2h0bWwvaW5kZXguaHRtbAojICMgPCFET0NUWVBFIGh0bWw+CiMgIyA8aHRtbD4KIyAjIDxoZWFkPgojICMgICAgIDx0aXRsZT5EZXBsb3ltZW50IFN1Y2Nlc3M8L3RpdGxlPgojICMgPC9oZWFkPgojICMgPGJvZHkgc3R5bGU9ImZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgdGV4dC1hbGlnbjogY2VudGVyOyBtYXJnaW4tdG9wOiA1MHB4OyI+CiMgIyAgICAgPGgxIHN0eWxlPSJjb2xvcjogZ3JlZW47Ij7inIUgSGV5ISBZb3VyIGluZnJhc3RydWN0dXJlIGlzIHVwIGFuZCBydW5uaW5nIPCfjok8L2gxPgojICMgICAgIDxwPkF1dG8gU2NhbGluZyBHcm91cHMsIExvYWQgQmFsYW5jZXJzLCBUYXJnZXQgR3JvdXBzLCBhbmQgTGF1bmNoIFRlbXBsYXRlcyB3ZXJlIGNyZWF0ZWQgc3VjY2Vzc2Z1bGx5LjwvcD4KIyAjIDwvYm9keT4KIyAjIDwvaHRtbD4KIyAjIEVPRgoKIyEvYmluL2Jhc2gKZXhlYyA+IC92YXIvbG9nL3VzZXJfZGF0YS5sb2cgMj4mMQpzZXQgLWUKc2V0IC14CgplY2hvICLwn5qAIFN0YXJ0aW5nIE5naW54IHNldHVwLi4uIgoKIyBVcGRhdGUgc3lzdGVtCmFwdC1nZXQgdXBkYXRlIC15CgojIEluc3RhbGwgTmdpbngKYXB0LWdldCBpbnN0YWxsIC15IG5naW54CnN5c3RlbWN0bCBlbmFibGUgbmdpbngKc3lzdGVtY3RsIHN0YXJ0IG5naW54CgojIE92ZXJ3cml0ZSBkZWZhdWx0IE5naW54IGNvbmZpZyB0byBzZXJ2ZSBpbmRleCBhbmQgcHJveHkgL3N1Ym1pdCB0byBOb2RlLmpzCmNhdCA8PCdOR0lOWCcgfCBzdWRvIHRlZSAvZXRjL25naW54L3NpdGVzLWF2YWlsYWJsZS9kZWZhdWx0ID4gL2Rldi9udWxsCnNlcnZlciB7CiAgICBsaXN0ZW4gODAgZGVmYXVsdF9zZXJ2ZXI7CiAgICBsaXN0ZW4gWzo6XTo4MCBkZWZhdWx0X3NlcnZlcjsKCiAgICBzZXJ2ZXJfbmFtZSBfOwoKICAgIHJvb3QgL3Vzci9zaGFyZS9uZ2lueC9odG1sOwogICAgaW5kZXggaW5kZXguaHRtbDsKCiAgICBsb2NhdGlvbiAvIHsKICAgICAgICB0cnlfZmlsZXMgL2luZGV4Lmh0bWwgPTQwNDsKICAgIH0KCiAgICBsb2NhdGlvbiAvc3VibWl0IHsKICAgICAgICBwcm94eV9wYXNzIGh0dHA6Ly9sb2NhbGhvc3Q6MzAwMDsKICAgICAgICBwcm94eV9odHRwX3ZlcnNpb24gMS4xOwogICAgICAgIHByb3h5X3NldF9oZWFkZXIgSG9zdCAkaG9zdDsKICAgICAgICBwcm94eV9zZXRfaGVhZGVyIFgtUmVhbC1JUCAkcmVtb3RlX2FkZHI7CiAgICAgICAgcHJveHlfc2V0X2hlYWRlciBYLUZvcndhcmRlZC1Gb3IgJHByb3h5X2FkZF94X2ZvcndhcmRlZF9mb3I7CiAgICAgICAgcHJveHlfc2V0X2hlYWRlciBYLUZvcndhcmRlZC1Qcm90byAkc2NoZW1lOwogICAgfQp9Ck5HSU5YCgojIFZhbGlkYXRlIGFuZCByZWxvYWQgTmdpbngKc3VkbyBuZ2lueCAtdCAmJiBzdWRvIHN5c3RlbWN0bCByZWxvYWQgbmdpbngKCiMgRGVwbG95IGluZGV4IHBhZ2UgdG8gTmdpbnggcm9vdApjYXQgPDwgJ0VPRicgPiAvdXNyL3NoYXJlL25naW54L2h0bWwvaW5kZXguaHRtbAo8IURPQ1RZUEUgaHRtbD4KPGh0bWw+CjxoZWFkPgogICAgPHRpdGxlPkRlcGxveW1lbnQgU3VjY2VzczwvdGl0bGU+CjwvaGVhZD4KPGJvZHkgc3R5bGU9ImZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgdGV4dC1hbGlnbjogY2VudGVyOyBtYXJnaW4tdG9wOiA1MHB4OyI+CiAgICA8aDEgc3R5bGU9ImNvbG9yOiBncmVlbjsiPuKchSBIZXkhIFlvdXIgaW5mcmFzdHJ1Y3R1cmUgaXMgdXAgYW5kIHJ1bm5pbmcg8J+OiTwvaDE+CiAgICA8cD5BdXRvIFNjYWxpbmcgR3JvdXBzLCBMb2FkIEJhbGFuY2VycywgVGFyZ2V0IEdyb3VwcywgYW5kIExhdW5jaCBUZW1wbGF0ZXMgd2VyZSBjcmVhdGVkIHN1Y2Nlc3NmdWxseS48L3A+CjwvYm9keT4KPC9odG1sPgpFT0YKCmVjaG8gIuKchSBOZ2lueCBzZXR1cCBjb21wbGV0ZS4gTG9naW4gcGFnZSBkZXBsb3llZCBhbmQgcHJveHkgY29uZmlndXJlZC4iCgo="
+
+      + iam_instance_profile {
+          + name = "ec2-ssm-profile"
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interfaces {
+          + associate_public_ip_address = "true"
+          + security_groups             = [
+              + "sg-0167dd473cb750985",
+            ]
+        }
+
+      + tag_specifications {
+          + resource_type = "instance"
+          + tags          = {
+              + "Name" = "asg-launch-template"
+            }
+        }
+    }
+
+  # aws_lb.app_load_balancer will be created
+  + resource "aws_lb" "app_load_balancer" {
+      + arn                                                          = (known after apply)
+      + arn_suffix                                                   = (known after apply)
+      + client_keep_alive                                            = 3600
+      + desync_mitigation_mode                                       = "defensive"
+      + dns_name                                                     = (known after apply)
+      + drop_invalid_header_fields                                   = false
+      + enable_deletion_protection                                   = false
+      + enable_http2                                                 = true
+      + enable_tls_version_and_cipher_suite_headers                  = false
+      + enable_waf_fail_open                                         = false
+      + enable_xff_client_port                                       = false
+      + enable_zonal_shift                                           = false
+      + enforce_security_group_inbound_rules_on_private_link_traffic = (known after apply)
+      + id                                                           = (known after apply)
+      + idle_timeout                                                 = 60
+      + internal                                                     = false
+      + ip_address_type                                              = (known after apply)
+      + load_balancer_type                                           = "application"
+      + name                                                         = "app-load-balancer"
+      + name_prefix                                                  = (known after apply)
+      + preserve_host_header                                         = false
+      + region                                                       = "ap-south-1"
+      + secondary_ips_auto_assigned_per_subnet                       = (known after apply)
+      + security_groups                                              = [
+          + "sg-0de9ba158bdeb60e8",
+        ]
+      + subnets                                                      = [
+          + "subnet-02ba33efaf730e53d",
+          + "subnet-03211ab72222d547e",
+        ]
+      + tags                                                         = {
+          + "Name" = "app-load-balancer"
+        }
+      + tags_all                                                     = {
+          + "Name" = "app-load-balancer"
+        }
+      + vpc_id                                                       = (known after apply)
+      + xff_header_processing_mode                                   = "append"
+      + zone_id                                                      = (known after apply)
+
+      + subnet_mapping (known after apply)
+    }
+
+  # aws_lb_listener.app_lb_listener will be created
+  + resource "aws_lb_listener" "app_lb_listener" {
+      + arn                                                                   = (known after apply)
+      + id                                                                    = (known after apply)
+      + load_balancer_arn                                                     = (known after apply)
+      + port                                                                  = 80
+      + protocol                                                              = "HTTP"
+      + region                                                                = "ap-south-1"
+      + routing_http_request_x_amzn_mtls_clientcert_header_name               = (known after apply)
+      + routing_http_request_x_amzn_mtls_clientcert_issuer_header_name        = (known after apply)
+      + routing_http_request_x_amzn_mtls_clientcert_leaf_header_name          = (known after apply)
+      + routing_http_request_x_amzn_mtls_clientcert_serial_number_header_name = (known after apply)
+      + routing_http_request_x_amzn_mtls_clientcert_subject_header_name       = (known after apply)
+      + routing_http_request_x_amzn_mtls_clientcert_validity_header_name      = (known after apply)
+      + routing_http_request_x_amzn_tls_cipher_suite_header_name              = (known after apply)
+      + routing_http_request_x_amzn_tls_version_header_name                   = (known after apply)
+      + routing_http_response_access_control_allow_credentials_header_value   = (known after apply)
+      + routing_http_response_access_control_allow_headers_header_value       = (known after apply)
+      + routing_http_response_access_control_allow_methods_header_value       = (known after apply)
+      + routing_http_response_access_control_allow_origin_header_value        = (known after apply)
+      + routing_http_response_access_control_expose_headers_header_value      = (known after apply)
+      + routing_http_response_access_control_max_age_header_value             = (known after apply)
+      + routing_http_response_content_security_policy_header_value            = (known after apply)
+      + routing_http_response_server_enabled                                  = (known after apply)
+      + routing_http_response_strict_transport_security_header_value          = (known after apply)
+      + routing_http_response_x_content_type_options_header_value             = (known after apply)
+      + routing_http_response_x_frame_options_header_value                    = (known after apply)
+      + ssl_policy                                                            = (known after apply)
+      + tags_all                                                              = (known after apply)
+      + tcp_idle_timeout_seconds                                              = (known after apply)
+
+      + default_action {
+          + order            = (known after apply)
+          + target_group_arn = (known after apply)
+          + type             = "forward"
+        }
+
+      + mutual_authentication (known after apply)
+    }
+
+  # aws_lb_target_group.web_target_group will be created
+  + resource "aws_lb_target_group" "web_target_group" {
+      + arn                                = (known after apply)
+      + arn_suffix                         = (known after apply)
+      + connection_termination             = (known after apply)
+      + deregistration_delay               = "300"
+      + id                                 = (known after apply)
+      + ip_address_type                    = (known after apply)
+      + lambda_multi_value_headers_enabled = false
+      + load_balancer_arns                 = (known after apply)
+      + load_balancing_algorithm_type      = (known after apply)
+      + load_balancing_anomaly_mitigation  = (known after apply)
+      + load_balancing_cross_zone_enabled  = (known after apply)
+      + name                               = "asg-target-group"
+      + name_prefix                        = (known after apply)
+      + port                               = 80
+      + preserve_client_ip                 = (known after apply)
+      + protocol                           = "HTTP"
+      + protocol_version                   = (known after apply)
+      + proxy_protocol_v2                  = false
+      + region                             = "ap-south-1"
+      + slow_start                         = 0
+      + tags                               = {
+          + "Name" = "asg-target-group"
+        }
+      + tags_all                           = {
+          + "Name" = "asg-target-group"
+        }
+      + target_type                        = "instance"
+      + vpc_id                             = "vpc-0ab13dabb26776e79"
+
+      + health_check {
+          + enabled             = true
+          + healthy_threshold   = 2
+          + interval            = 30
+          + matcher             = "200"
+          + path                = "/"
+          + port                = "traffic-port"
+          + protocol            = "HTTP"
+          + timeout             = 5
+          + unhealthy_threshold = 2
+        }
+
+      + stickiness (known after apply)
+
+      + target_failover (known after apply)
+
+      + target_group_health (known after apply)
+
+      + target_health_state (known after apply)
+    }
+
+Plan: 6 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  ~ dns_name = "app-load-balancer-181492573.ap-south-1.elb.amazonaws.com" -> (known after apply)
