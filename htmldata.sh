@@ -56,5 +56,5 @@ cat << 'EOF' > /usr/share/nginx/html/index.html
 </html>
 EOF
 
-echo "Nginx setup complete. Login page deployed and proxy configured."
+echo "Nginx setup complete. Login page deployed and proxy configured." ##echo
 
