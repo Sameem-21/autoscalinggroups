@@ -1,11 +1,18 @@
 name: autoscaling_groups_workflow
 on: workflow_dispatch
 jobs:
+ 
   initiate_terraform:
    runs-on: self-hosted
    steps:
     - name: checkout
       uses: actions/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+         terraform_version: 1.9.5
+
       
     - name: terraform initialazation
       run: terraform init -upgrade
@@ -22,6 +29,7 @@ jobs:
 
   format_the_code:
     runs-on: self-hosted
+    needs: [validate_terraform]
     steps:
 
      - name: checkout
