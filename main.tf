@@ -159,16 +159,16 @@ resource "aws_vpc_security_group_ingress_rule" "allow_from_alb_sg" {
 resource "aws_vpc_security_group_ingress_rule" "allow_ssh_from_alb_sg" {
   security_group_id = aws_security_group.ec2_app_sg.id
   #referenced_security_group_id = aws_security_group.alb_sg.id
-  cidr_ipv4 = "49.207.186.200/32"
-  from_port        = 22
-  to_port          = 22
-  ip_protocol      = "tcp"
+  cidr_ipv4   = "49.207.186.200/32"
+  from_port   = 22
+  to_port     = 22
+  ip_protocol = "tcp"
 }
 resource "aws_vpc_security_group_egress_rule" "ec2_allow_all_outbound" {
   security_group_id = aws_security_group.ec2_app_sg.id
   #referenced_security_group_id = aws_security_group.alb_sg.id
-  cidr_ipv4         = "0.0.0.0/0"
-  ip_protocol       = "-1"
+  cidr_ipv4   = "0.0.0.0/0"
+  ip_protocol = "-1"
 }
 #creatinh IAM Instance profile
 # 1. Create IAM role for EC2
@@ -205,21 +205,21 @@ resource "aws_launch_template" "web_launch_template" {
   name = "asg-launch-template"
   #template_version= "Latest"
   #version = "$latest"
-  image_id               = "ami-02d26659fd82cf299" #Amazon ubuntu AMI (HVM), SSD Volume Type
-  instance_type          = "t3.micro"
-  key_name               = "new-key-pair"  #replace with your key pair name
-  
-network_interfaces {
+  image_id      = "ami-02d26659fd82cf299" #Amazon ubuntu AMI (HVM), SSD Volume Type
+  instance_type = "t3.micro"
+  key_name      = "new-key-pair" #replace with your key pair name
+
+  network_interfaces {
     associate_public_ip_address = true
-    security_groups             = [aws_security_group.ec2_app_sg.id]  #vpc_security_group_ids = [aws_security_group.ec2_app_sg.id] #attaching the security group created for ec2 instances
+    security_groups             = [aws_security_group.ec2_app_sg.id] #vpc_security_group_ids = [aws_security_group.ec2_app_sg.id] #attaching the security group created for ec2 instances
   }
- 
+
 
   #paste my iam instance profile here
   iam_instance_profile {
     name = aws_iam_instance_profile.ec2_profile.name
   }
-  
+
 
   user_data = filebase64("${path.root}/htmldata.sh") #using user data to install httpd and start  service
 
@@ -232,7 +232,7 @@ network_interfaces {
     tags = {
       Name = "asg-launch-template"
     }
-  
+
   }
 }
 output "launch_template" {
@@ -280,8 +280,8 @@ resource "aws_lb" "app_load_balancer" {
     Name = "app-load-balancer"
   }
 }
-output "load_balancer"{
-  value = aws_lb.app_load_balancer.name
+output "load_balancer" {
+  value       = aws_lb.app_load_balancer.name
   description = "The name of the load balancer"
 }
 
@@ -315,7 +315,7 @@ resource "aws_autoscaling_group" "demo-asg" {
   max_size            = 4
   min_size            = 1
   desired_capacity    = 3
-  target_group_arns = [aws_lb_target_group.web_target_group.arn] 
+  target_group_arns   = [aws_lb_target_group.web_target_group.arn]
   instance_maintenance_policy {
     min_healthy_percentage = 0
     max_healthy_percentage = 100 #terminate and launch

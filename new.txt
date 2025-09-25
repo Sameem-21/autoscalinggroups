@@ -1,0 +1,622 @@
+
+Note: Objects have changed outside of Terraform
+
+Terraform detected the following changes made outside of Terraform since the
+last "terraform apply" which may have affected this plan:
+
+  # aws_autoscaling_group.demo-asg has been deleted
+  - resource "aws_autoscaling_group" "demo-asg" {
+        id                               = "demo-asg"
+      - name                             = "demo-asg" -> null
+        # (29 unchanged attributes hidden)
+
+        # (5 unchanged blocks hidden)
+    }
+
+  # aws_internet_gateway.demo_igw has been deleted
+  - resource "aws_internet_gateway" "demo_igw" {
+      - id       = "igw-00d92867d1e7e3135" -> null
+        tags     = {
+            "Name" = "demo_igw"
+        }
+        # (5 unchanged attributes hidden)
+    }
+
+  # aws_launch_template.web_launch_template has been deleted
+  - resource "aws_launch_template" "web_launch_template" {
+      - id                                   = "lt-0e18679a0415e10f4" -> null
+        name                                 = "asg-launch-template"
+        # (17 unchanged attributes hidden)
+
+        # (3 unchanged blocks hidden)
+    }
+
+  # aws_lb.app_load_balancer has been deleted
+  - resource "aws_lb" "app_load_balancer" {
+      - arn                                                          = "arn:aws:elasticloadbalancing:ap-south-1:588082971984:loadbalancer/app/app-load-balancer/4a2320c2dbb7158e" -> null
+      - dns_name                                                     = "app-load-balancer-1747699663.ap-south-1.elb.amazonaws.com" -> null
+        id                                                           = "arn:aws:elasticloadbalancing:ap-south-1:588082971984:loadbalancer/app/app-load-balancer/4a2320c2dbb7158e"
+        name                                                         = "app-load-balancer"
+        tags                                                         = {
+            "Name" = "app-load-balancer"
+        }
+        # (26 unchanged attributes hidden)
+
+        # (4 unchanged blocks hidden)
+    }
+
+  # aws_lb_target_group.web_target_group has been deleted
+  - resource "aws_lb_target_group" "web_target_group" {
+      - arn                                = "arn:aws:elasticloadbalancing:ap-south-1:588082971984:targetgroup/asg-target-group/c6853a4bb52cac85" -> null
+        id                                 = "arn:aws:elasticloadbalancing:ap-south-1:588082971984:targetgroup/asg-target-group/c6853a4bb52cac85"
+        name                               = "asg-target-group"
+        tags                               = {
+            "Name" = "asg-target-group"
+        }
+        # (18 unchanged attributes hidden)
+
+        # (5 unchanged blocks hidden)
+    }
+
+  # aws_route_table.demo_route_table has been deleted
+  - resource "aws_route_table" "demo_route_table" {
+      - id               = "rtb-09a0fdfeb4c98ebfa" -> null
+        tags             = {
+            "Name" = "demo_route_table"
+        }
+        # (7 unchanged attributes hidden)
+    }
+
+  # aws_security_group.alb_sg has been deleted
+  - resource "aws_security_group" "alb_sg" {
+      - id                     = "sg-0de9ba158bdeb60e8" -> null
+        name                   = "alb-sg"
+        tags                   = {
+            "Name" = "alb-sg"
+        }
+        # (10 unchanged attributes hidden)
+    }
+
+  # aws_security_group.ec2_app_sg has been deleted
+  - resource "aws_security_group" "ec2_app_sg" {
+      - id                     = "sg-0167dd473cb750985" -> null
+        name                   = "ec2-app-sg"
+        tags                   = {
+            "Name" = "ec2-app-sg"
+        }
+        # (10 unchanged attributes hidden)
+    }
+
+  # aws_subnet.public_subnet_1 has been deleted
+  - resource "aws_subnet" "public_subnet_1" {
+      - id                                             = "subnet-02ba33efaf730e53d" -> null
+        tags                                           = {
+            "Name" = "public_subnet_1"
+        }
+        # (21 unchanged attributes hidden)
+    }
+
+  # aws_subnet.public_subnet_2 has been deleted
+  - resource "aws_subnet" "public_subnet_2" {
+      - id                                             = "subnet-03211ab72222d547e" -> null
+        tags                                           = {
+            "Name" = "public_subnet_2"
+        }
+        # (21 unchanged attributes hidden)
+    }
+
+  # aws_vpc.demo-vpc has been deleted
+  - resource "aws_vpc" "demo-vpc" {
+      - id                                   = "vpc-0ab13dabb26776e79" -> null
+        tags                                 = {
+            "Name" = "demo-vpc"
+        }
+        # (20 unchanged attributes hidden)
+    }
+
+
+Unless you have made equivalent changes to your configuration, or ignored the
+relevant attributes using ignore_changes, the following plan may include
+actions to undo or respond to these changes.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_autoscaling_group.demo-asg will be created
+  + resource "aws_autoscaling_group" "demo-asg" {
+      + arn                              = (known after apply)
+      + availability_zones               = (known after apply)
+      + default_cooldown                 = (known after apply)
+      + desired_capacity                 = 3
+      + force_delete                     = false
+      + force_delete_warm_pool           = false
+      + health_check_grace_period        = 300
+      + health_check_type                = (known after apply)
+      + id                               = (known after apply)
+      + ignore_failed_scaling_activities = false
+      + load_balancers                   = (known after apply)
+      + max_size                         = 4
+      + metrics_granularity              = "1Minute"
+      + min_size                         = 1
+      + name                             = "demo-asg"
+      + name_prefix                      = (known after apply)
+      + predicted_capacity               = (known after apply)
+      + protect_from_scale_in            = false
+      + region                           = "ap-south-1"
+      + service_linked_role_arn          = (known after apply)
+      + target_group_arns                = (known after apply)
+      + vpc_zone_identifier              = (known after apply)
+      + wait_for_capacity_timeout        = "10m"
+      + warm_pool_size                   = (known after apply)
+
+      + availability_zone_distribution (known after apply)
+
+      + capacity_reservation_specification (known after apply)
+
+      + instance_maintenance_policy {
+          + max_healthy_percentage = 100
+          + min_healthy_percentage = 0
+        }
+
+      + launch_template {
+          + id      = (known after apply)
+          + name    = (known after apply)
+          + version = "$Latest"
+        }
+
+      + mixed_instances_policy (known after apply)
+
+      + traffic_source (known after apply)
+    }
+
+  # aws_autoscaling_policy.target_tracking_cpu will be created
+  + resource "aws_autoscaling_policy" "target_tracking_cpu" {
+      + arn                     = (known after apply)
+      + autoscaling_group_name  = "demo-asg"
+      + enabled                 = true
+      + id                      = (known after apply)
+      + metric_aggregation_type = (known after apply)
+      + name                    = "Target Tracking Policy"
+      + policy_type             = "TargetTrackingScaling"
+      + region                  = "ap-south-1"
+
+      + target_tracking_configuration {
+          + disable_scale_in = false
+          + target_value     = 50
+
+          + predefined_metric_specification {
+              + predefined_metric_type = "ASGAverageCPUUtilization"
+            }
+        }
+    }
+
+  # aws_internet_gateway.demo_igw will be created
+  + resource "aws_internet_gateway" "demo_igw" {
+      + arn      = (known after apply)
+      + id       = (known after apply)
+      + owner_id = (known after apply)
+      + region   = "ap-south-1"
+      + tags     = {
+          + "Name" = "demo_igw"
+        }
+      + tags_all = {
+          + "Name" = "demo_igw"
+        }
+      + vpc_id   = (known after apply)
+    }
+
+  # aws_launch_template.web_launch_template will be created
+  + resource "aws_launch_template" "web_launch_template" {
+      + arn             = (known after apply)
+      + default_version = (known after apply)
+      + id              = (known after apply)
+      + image_id        = "ami-02d26659fd82cf299"
+      + instance_type   = "t3.micro"
+      + key_name        = "new-key-pair"
+      + latest_version  = (known after apply)
+      + name            = "asg-launch-template"
+      + name_prefix     = (known after apply)
+      + region          = "ap-south-1"
+      + tags_all        = (known after apply)
+      + user_data       = "IyEvYmluL2Jhc2gKZXhlYyA+IC92YXIvbG9nL3VzZXJfZGF0YS5sb2cgMj4mMQpzZXQgLWUKc2V0IC14CgplY2hvICLwn5qAIFN0YXJ0aW5nIE5naW54IHNldHVwLi4uIgoKIyBVcGRhdGUgc3lzdGVtCmFwdC1nZXQgdXBkYXRlIC15CgojIEluc3RhbGwgTmdpbngKYXB0LWdldCBpbnN0YWxsIC15IG5naW54CnN5c3RlbWN0bCBlbmFibGUgbmdpbngKc3lzdGVtY3RsIHN0YXJ0IG5naW54CgojIE92ZXJ3cml0ZSBkZWZhdWx0IE5naW54IGNvbmZpZyB0byBzZXJ2ZSBpbmRleCBhbmQgcHJveHkgL3N1Ym1pdCB0byBOb2RlLmpzCmNhdCA8PCdOR0lOWCcgfCBzdWRvIHRlZSAvZXRjL25naW54L3NpdGVzLWF2YWlsYWJsZS9kZWZhdWx0ID4gL2Rldi9udWxsCnNlcnZlciB7CiAgICBsaXN0ZW4gODAgZGVmYXVsdF9zZXJ2ZXI7CiAgICBsaXN0ZW4gWzo6XTo4MCBkZWZhdWx0X3NlcnZlcjsKCiAgICBzZXJ2ZXJfbmFtZSBfOwoKICAgIHJvb3QgL3Vzci9zaGFyZS9uZ2lueC9odG1sOwogICAgaW5kZXggaW5kZXguaHRtbDsKCiAgICBsb2NhdGlvbiAvIHsKICAgICAgICB0cnlfZmlsZXMgL2luZGV4Lmh0bWwgPTQwNDsKICAgIH0KCiAgICBsb2NhdGlvbiAvc3VibWl0IHsKICAgICAgICBwcm94eV9wYXNzIGh0dHA6Ly9sb2NhbGhvc3Q6MzAwMDsKICAgICAgICBwcm94eV9odHRwX3ZlcnNpb24gMS4xOwogICAgICAgIHByb3h5X3NldF9oZWFkZXIgSG9zdCAkaG9zdDsKICAgICAgICBwcm94eV9zZXRfaGVhZGVyIFgtUmVhbC1JUCAkcmVtb3RlX2FkZHI7CiAgICAgICAgcHJveHlfc2V0X2hlYWRlciBYLUZvcndhcmRlZC1Gb3IgJHByb3h5X2FkZF94X2ZvcndhcmRlZF9mb3I7CiAgICAgICAgcHJveHlfc2V0X2hlYWRlciBYLUZvcndhcmRlZC1Qcm90byAkc2NoZW1lOwogICAgfQp9Ck5HSU5YCgojIFZhbGlkYXRlIGFuZCByZWxvYWQgTmdpbngKc3VkbyBuZ2lueCAtdCAmJiBzdWRvIHN5c3RlbWN0bCByZWxvYWQgbmdpbngKCiMgRGVwbG95IGluZGV4IHBhZ2UgdG8gTmdpbnggcm9vdApjYXQgPDwgJ0VPRicgPiAvdXNyL3NoYXJlL25naW54L2h0bWwvaW5kZXguaHRtbAo8IURPQ1RZUEUgaHRtbD4KPGh0bWw+CjxoZWFkPgogICAgPHRpdGxlPkRlcGxveW1lbnQgU3VjY2VzczwvdGl0bGU+CjwvaGVhZD4KPGJvZHkgc3R5bGU9ImZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgdGV4dC1hbGlnbjogY2VudGVyOyBtYXJnaW4tdG9wOiA1MHB4OyI+CiAgICA8aDEgc3R5bGU9ImNvbG9yOiBncmVlbjsiPkhleSEgWW91ciBpbmZyYXN0cnVjdHVyZSBpcyB1cCBhbmQgcnVubmluZyAvaDE+CiAgICA8cD5BdXRvIFNjYWxpbmcgR3JvdXBzLCBMb2FkIEJhbGFuY2VycywgVGFyZ2V0IEdyb3VwcywgYW5kIExhdW5jaCBUZW1wbGF0ZXMgd2VyZSBjcmVhdGVkIHN1Y2Nlc3NmdWxseS48L3A+CiAgICA8aDIgc3R5bGU9ImNvbG9yOiBibHVlOyI+c2VydmVyIGRldGFpbHM8L2gyPgogICAgPHAgc3R5bGU9ImNvbG9yOiBicm93bjsiPkhvc3RuYW1lOiAkKGhvc3RuYW1lKTwvcD4KICAgIDxwIHN0eWxlPSJjb2xvcjogYnJvd247Ij5Qcml2YXRlIElQOiAkKGhvc3RuYW1lIC1JIHwgY3V0IC1kIiIgLWYxKTwvcD4KPC9ib2R5Pgo8L2h0bWw+CkVPRgoKZWNobyAiTmdpbnggc2V0dXAgY29tcGxldGUuIExvZ2luIHBhZ2UgZGVwbG95ZWQgYW5kIHByb3h5IGNvbmZpZ3VyZWQuIiAjI2VjaG8KCg=="
+
+      + iam_instance_profile {
+          + name = "ec2-ssm-profile"
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interfaces {
+          + associate_public_ip_address = "true"
+          + security_groups             = (known after apply)
+        }
+
+      + tag_specifications {
+          + resource_type = "instance"
+          + tags          = {
+              + "Name" = "asg-launch-template"
+            }
+        }
+    }
+
+  # aws_lb.app_load_balancer will be created
+  + resource "aws_lb" "app_load_balancer" {
+      + arn                                                          = (known after apply)
+      + arn_suffix                                                   = (known after apply)
+      + client_keep_alive                                            = 3600
+      + desync_mitigation_mode                                       = "defensive"
+      + dns_name                                                     = (known after apply)
+      + drop_invalid_header_fields                                   = false
+      + enable_deletion_protection                                   = false
+      + enable_http2                                                 = true
+      + enable_tls_version_and_cipher_suite_headers                  = false
+      + enable_waf_fail_open                                         = false
+      + enable_xff_client_port                                       = false
+      + enable_zonal_shift                                           = false
+      + enforce_security_group_inbound_rules_on_private_link_traffic = (known after apply)
+      + id                                                           = (known after apply)
+      + idle_timeout                                                 = 60
+      + internal                                                     = false
+      + ip_address_type                                              = (known after apply)
+      + load_balancer_type                                           = "application"
+      + name                                                         = "app-load-balancer"
+      + name_prefix                                                  = (known after apply)
+      + preserve_host_header                                         = false
+      + region                                                       = "ap-south-1"
+      + secondary_ips_auto_assigned_per_subnet                       = (known after apply)
+      + security_groups                                              = (known after apply)
+      + subnets                                                      = (known after apply)
+      + tags                                                         = {
+          + "Name" = "app-load-balancer"
+        }
+      + tags_all                                                     = {
+          + "Name" = "app-load-balancer"
+        }
+      + vpc_id                                                       = (known after apply)
+      + xff_header_processing_mode                                   = "append"
+      + zone_id                                                      = (known after apply)
+
+      + subnet_mapping (known after apply)
+    }
+
+  # aws_lb_listener.app_lb_listener will be created
+  + resource "aws_lb_listener" "app_lb_listener" {
+      + arn                                                                   = (known after apply)
+      + id                                                                    = (known after apply)
+      + load_balancer_arn                                                     = (known after apply)
+      + port                                                                  = 80
+      + protocol                                                              = "HTTP"
+      + region                                                                = "ap-south-1"
+      + routing_http_request_x_amzn_mtls_clientcert_header_name               = (known after apply)
+      + routing_http_request_x_amzn_mtls_clientcert_issuer_header_name        = (known after apply)
+      + routing_http_request_x_amzn_mtls_clientcert_leaf_header_name          = (known after apply)
+      + routing_http_request_x_amzn_mtls_clientcert_serial_number_header_name = (known after apply)
+      + routing_http_request_x_amzn_mtls_clientcert_subject_header_name       = (known after apply)
+      + routing_http_request_x_amzn_mtls_clientcert_validity_header_name      = (known after apply)
+      + routing_http_request_x_amzn_tls_cipher_suite_header_name              = (known after apply)
+      + routing_http_request_x_amzn_tls_version_header_name                   = (known after apply)
+      + routing_http_response_access_control_allow_credentials_header_value   = (known after apply)
+      + routing_http_response_access_control_allow_headers_header_value       = (known after apply)
+      + routing_http_response_access_control_allow_methods_header_value       = (known after apply)
+      + routing_http_response_access_control_allow_origin_header_value        = (known after apply)
+      + routing_http_response_access_control_expose_headers_header_value      = (known after apply)
+      + routing_http_response_access_control_max_age_header_value             = (known after apply)
+      + routing_http_response_content_security_policy_header_value            = (known after apply)
+      + routing_http_response_server_enabled                                  = (known after apply)
+      + routing_http_response_strict_transport_security_header_value          = (known after apply)
+      + routing_http_response_x_content_type_options_header_value             = (known after apply)
+      + routing_http_response_x_frame_options_header_value                    = (known after apply)
+      + ssl_policy                                                            = (known after apply)
+      + tags_all                                                              = (known after apply)
+      + tcp_idle_timeout_seconds                                              = (known after apply)
+
+      + default_action {
+          + order            = (known after apply)
+          + target_group_arn = (known after apply)
+          + type             = "forward"
+        }
+
+      + mutual_authentication (known after apply)
+    }
+
+  # aws_lb_target_group.web_target_group will be created
+  + resource "aws_lb_target_group" "web_target_group" {
+      + arn                                = (known after apply)
+      + arn_suffix                         = (known after apply)
+      + connection_termination             = (known after apply)
+      + deregistration_delay               = "300"
+      + id                                 = (known after apply)
+      + ip_address_type                    = (known after apply)
+      + lambda_multi_value_headers_enabled = false
+      + load_balancer_arns                 = (known after apply)
+      + load_balancing_algorithm_type      = (known after apply)
+      + load_balancing_anomaly_mitigation  = (known after apply)
+      + load_balancing_cross_zone_enabled  = (known after apply)
+      + name                               = "asg-target-group"
+      + name_prefix                        = (known after apply)
+      + port                               = 80
+      + preserve_client_ip                 = (known after apply)
+      + protocol                           = "HTTP"
+      + protocol_version                   = (known after apply)
+      + proxy_protocol_v2                  = false
+      + region                             = "ap-south-1"
+      + slow_start                         = 0
+      + tags                               = {
+          + "Name" = "asg-target-group"
+        }
+      + tags_all                           = {
+          + "Name" = "asg-target-group"
+        }
+      + target_type                        = "instance"
+      + vpc_id                             = (known after apply)
+
+      + health_check {
+          + enabled             = true
+          + healthy_threshold   = 2
+          + interval            = 30
+          + matcher             = "200"
+          + path                = "/"
+          + port                = "traffic-port"
+          + protocol            = "HTTP"
+          + timeout             = 5
+          + unhealthy_threshold = 2
+        }
+
+      + stickiness (known after apply)
+
+      + target_failover (known after apply)
+
+      + target_group_health (known after apply)
+
+      + target_health_state (known after apply)
+    }
+
+  # aws_route_table.demo_route_table will be created
+  + resource "aws_route_table" "demo_route_table" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + region           = "ap-south-1"
+      + route            = [
+          + {
+              + cidr_block                 = "0.0.0.0/0"
+              + gateway_id                 = (known after apply)
+                # (11 unchanged attributes hidden)
+            },
+        ]
+      + tags             = {
+          + "Name" = "demo_route_table"
+        }
+      + tags_all         = {
+          + "Name" = "demo_route_table"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # aws_route_table_association.demo_route_table_association_1 will be created
+  + resource "aws_route_table_association" "demo_route_table_association_1" {
+      + id             = (known after apply)
+      + region         = "ap-south-1"
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_route_table_association.demo_route_table_association_2 will be created
+  + resource "aws_route_table_association" "demo_route_table_association_2" {
+      + id             = (known after apply)
+      + region         = "ap-south-1"
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_security_group.alb_sg will be created
+  + resource "aws_security_group" "alb_sg" {
+      + arn                    = (known after apply)
+      + description            = "sallowing http, https"
+      + egress                 = (known after apply)
+      + id                     = (known after apply)
+      + ingress                = (known after apply)
+      + name                   = "alb-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + region                 = "ap-south-1"
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "alb-sg"
+        }
+      + tags_all               = {
+          + "Name" = "alb-sg"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # aws_security_group.ec2_app_sg will be created
+  + resource "aws_security_group" "ec2_app_sg" {
+      + arn                    = (known after apply)
+      + description            = "allowing traffic from ALB SG"
+      + egress                 = (known after apply)
+      + id                     = (known after apply)
+      + ingress                = (known after apply)
+      + name                   = "ec2-app-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + region                 = "ap-south-1"
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "ec2-app-sg"
+        }
+      + tags_all               = {
+          + "Name" = "ec2-app-sg"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # aws_subnet.public_subnet_1 will be created
+  + resource "aws_subnet" "public_subnet_1" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "ap-south-1a"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.1.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + region                                         = "ap-south-1"
+      + tags                                           = {
+          + "Name" = "public_subnet_1"
+        }
+      + tags_all                                       = {
+          + "Name" = "public_subnet_1"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # aws_subnet.public_subnet_2 will be created
+  + resource "aws_subnet" "public_subnet_2" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "ap-south-1b"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.2.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + region                                         = "ap-south-1"
+      + tags                                           = {
+          + "Name" = "public_subnet_2"
+        }
+      + tags_all                                       = {
+          + "Name" = "public_subnet_2"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # aws_vpc.demo-vpc will be created
+  + resource "aws_vpc" "demo-vpc" {
+      + arn                                  = (known after apply)
+      + cidr_block                           = "10.0.0.0/16"
+      + default_network_acl_id               = (known after apply)
+      + default_route_table_id               = (known after apply)
+      + default_security_group_id            = (known after apply)
+      + dhcp_options_id                      = (known after apply)
+      + enable_dns_hostnames                 = true
+      + enable_dns_support                   = true
+      + enable_network_address_usage_metrics = (known after apply)
+      + id                                   = (known after apply)
+      + instance_tenancy                     = "default"
+      + ipv6_association_id                  = (known after apply)
+      + ipv6_cidr_block                      = (known after apply)
+      + ipv6_cidr_block_network_border_group = (known after apply)
+      + main_route_table_id                  = (known after apply)
+      + owner_id                             = (known after apply)
+      + region                               = "ap-south-1"
+      + tags                                 = {
+          + "Name" = "demo-vpc"
+        }
+      + tags_all                             = {
+          + "Name" = "demo-vpc"
+        }
+    }
+
+  # aws_vpc_security_group_egress_rule.allow_all_outbound will be created
+  + resource "aws_vpc_security_group_egress_rule" "allow_all_outbound" {
+      + arn                    = (known after apply)
+      + cidr_ipv4              = "0.0.0.0/0"
+      + id                     = (known after apply)
+      + ip_protocol            = "-1"
+      + region                 = "ap-south-1"
+      + security_group_id      = (known after apply)
+      + security_group_rule_id = (known after apply)
+      + tags_all               = {}
+    }
+
+  # aws_vpc_security_group_egress_rule.ec2_allow_all_outbound will be created
+  + resource "aws_vpc_security_group_egress_rule" "ec2_allow_all_outbound" {
+      + arn                    = (known after apply)
+      + cidr_ipv4              = "0.0.0.0/0"
+      + id                     = (known after apply)
+      + ip_protocol            = "-1"
+      + region                 = "ap-south-1"
+      + security_group_id      = (known after apply)
+      + security_group_rule_id = (known after apply)
+      + tags_all               = {}
+    }
+
+  # aws_vpc_security_group_ingress_rule.allow_from_alb_sg will be created
+  + resource "aws_vpc_security_group_ingress_rule" "allow_from_alb_sg" {
+      + arn                          = (known after apply)
+      + from_port                    = 80
+      + id                           = (known after apply)
+      + ip_protocol                  = "tcp"
+      + referenced_security_group_id = (known after apply)
+      + region                       = "ap-south-1"
+      + security_group_id            = (known after apply)
+      + security_group_rule_id       = (known after apply)
+      + tags_all                     = {}
+      + to_port                      = 80
+    }
+
+  # aws_vpc_security_group_ingress_rule.allow_http will be created
+  + resource "aws_vpc_security_group_ingress_rule" "allow_http" {
+      + arn                    = (known after apply)
+      + cidr_ipv4              = "0.0.0.0/0"
+      + from_port              = 80
+      + id                     = (known after apply)
+      + ip_protocol            = "tcp"
+      + region                 = "ap-south-1"
+      + security_group_id      = (known after apply)
+      + security_group_rule_id = (known after apply)
+      + tags_all               = {}
+      + to_port                = 80
+    }
+
+  # aws_vpc_security_group_ingress_rule.allow_https will be created
+  + resource "aws_vpc_security_group_ingress_rule" "allow_https" {
+      + arn                    = (known after apply)
+      + cidr_ipv4              = "0.0.0.0/0"
+      + from_port              = 443
+      + id                     = (known after apply)
+      + ip_protocol            = "tcp"
+      + region                 = "ap-south-1"
+      + security_group_id      = (known after apply)
+      + security_group_rule_id = (known after apply)
+      + tags_all               = {}
+      + to_port                = 443
+    }
+
+  # aws_vpc_security_group_ingress_rule.allow_ssh_from_alb_sg will be created
+  + resource "aws_vpc_security_group_ingress_rule" "allow_ssh_from_alb_sg" {
+      + arn                    = (known after apply)
+      + cidr_ipv4              = "49.207.186.200/32"
+      + from_port              = 22
+      + id                     = (known after apply)
+      + ip_protocol            = "tcp"
+      + region                 = "ap-south-1"
+      + security_group_id      = (known after apply)
+      + security_group_rule_id = (known after apply)
+      + tags_all               = {}
+      + to_port                = 22
+    }
+
+Plan: 21 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  ~ dns_name        = "app-load-balancer-1747699663.ap-south-1.elb.amazonaws.com" -> (known after apply)
