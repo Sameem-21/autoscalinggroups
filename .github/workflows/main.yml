@@ -8,7 +8,7 @@ jobs:
       uses: actions/checkout@v3
       
     - name: terraform initialazation
-      run: terraform init
+      run: terraform init -upgrade
 
       
   validate_terraform:
