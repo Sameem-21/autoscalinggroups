@@ -1,0 +1,79 @@
+name: autoscaling_groups_workflow
+on: workflow_dispatch
+jobs:
+  initiate_terraform:
+   runs-on: self-hosted
+   steps:
+    - name: checkout
+      uses: actions/checkout@v3
+      
+    - name: terraform initialazation
+      run: terraform init
+
+      
+  validate_terraform:
+   runs-on: self-hosted
+   steps:
+    - name: checkout 
+      uses: actions/checkout@v3 
+    - name: terraform plan validate
+      run: terraform validate
+
+  format_the_code:
+    runs-on: self-hosted
+    steps:
+
+     - name: checkout
+       uses: actions/checkout@v3
+
+     - name: terraform formatting
+       run : terraform fmt
+
+  plan_the_code: 
+
+    runs-on: self-hosted
+    needs: [validate_terraform]
+    steps: 
+
+     - name: checkout
+       uses: actions/checkout@v3
+
+     - name: terraform planning
+       run: terraform plan -out planfile.out
+
+  viewing_the_created_things:
+
+     runs-on: self-hosted
+     needs: [plan_the_code]
+     steps: 
+
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: terraform showing data to be created
+        run: terraform show -no-color planfile.out > planfile.txt
+
+      - name: terraform viewing the file
+        run: grep "will be created" planfile.txt
+
+  applying_the_code:
+
+      runs-on: self-hosted
+      needs: [plan_the_code]
+      steps:
+
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: terraform apply
+        run: terraform apply planfile.out
+
+      - name: verifying the data
+        run : echo "terraform validated and initiated"
+
+        
+      
+    
+
+   
+
